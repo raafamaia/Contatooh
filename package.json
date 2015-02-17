@@ -1,0 +1,19 @@
+{
+  "name": "contatooh",
+  "version": "1.0.0",
+  "description": "Estudo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rafael Maia",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.2.4",
+    "express": "^4.11.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raafamaia/Contatooh.git"
+  }
+}
