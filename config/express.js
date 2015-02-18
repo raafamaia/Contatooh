@@ -4,6 +4,11 @@
 /// desta forma teremos a configuração centralizada.
 
 var express = require('express');
+var load = require('express-load');
+var bodyParser = require('body-parser');
+
+//Com o express-load não é mais necessário usar require('../app/routes/home');
+//var home = require('../app/routes/home');
 
 module.exports = function(){
 
@@ -13,9 +18,20 @@ module.exports = function(){
 
 	// variável de ambiente
 	app.set('port', 3000);
+	app.set('view engine', 'ejs');
+	app.set('views', './app/views');
 
 	//middleware
 	app.use(express.static('./public'));
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(bodyParser.json());
+    app.use(require('method-override')());
+
+
+    load('models', {cwd: 'app'})
+		.then('controllers')
+		.then('routes')
+		.into(app);
 
 	return app;
 };

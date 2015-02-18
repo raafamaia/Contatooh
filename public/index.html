@@ -1,11 +1,18 @@
-<!doctype html>
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Bem vindo!</title>
+<html ng-app="contatooh">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Contatooh</title>
 </head>
-<body>
-	<h1> WELCOME TO CONTATOOH MOTHERFUCKER </h1>
+<body ng-controller="ContatosController">
+    <h1>Bem vindo ao Contatooh!</h1>
+
+    <button ng-click="incrementa()">Novo</button>
+    <p>Contatos cadastrados: {{total}}</p>
+
+
+    <script src="vendor/angular/angular.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/controllers/ContatosController.js"></script>
 </body>
 </html>
