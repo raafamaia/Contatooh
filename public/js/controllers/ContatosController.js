@@ -2,12 +2,12 @@
  * Created by rafaelmaia on 2/18/15.
  */
 angular.module('contatooh').controller('ContatosController',
-    function($scope, $resource){
+    function($scope, Contato){
         $scope.contatos = [];
         $scope.filtro = '';
         $scope.mensagem = {texto: ''};
 
-        var Contato = $resource('/contatos/:id');
+        //var Contato = $resource('/contatos/:id');
         function buscarContatos() {
             Contato.query(
                 function (contatos) {
