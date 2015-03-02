@@ -17,6 +17,7 @@
         <tr>
             <th>NOME</th>
             <th>EMAIL</th>
+            <th>EMERGENCIA</th>
             <th class="text-center"></th>
         </tr>
         <tr ng-repeat="contato in contatos | filter: filtro">
@@ -25,6 +26,9 @@
             </td>
             <td>
                 {{contato.email}}
+            </td>
+            <td>
+                <a ng-href="#/contato/{{contato.emergencia._id}}">{{contato.emergencia.nome}}</a>
             </td>
             <td class="text-center">
                 <button ng-click="remove(contato)" class="btn btn-warning">
