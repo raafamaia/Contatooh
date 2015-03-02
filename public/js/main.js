@@ -2,8 +2,10 @@
  * Created by rafaelmaia on 2/18/15.
  */
 angular.module('contatooh', ['ngRoute', 'ngResource'])
-    .config(function($routeProvider){
+    .config(function($routeProvider, $httpProvider){
         //n Contatos
+        $httpProvider.interceptors.push('meuInterceptador');
+
         $routeProvider.when('/contatos', {
             templateUrl: 'partials/contatos.html',
             controller: 'ContatosController'
@@ -18,6 +20,11 @@ angular.module('contatooh', ['ngRoute', 'ngResource'])
             templateUrl: 'partials/contato.html',
             controller: 'ContatoController'
         });
+
+        $routeProvider.when('/auth', {
+            templateUrl: 'partials/auth.html'
+        });
+
         //url padrão, caso nenhuma seja encontrada
         $routeProvider.otherwise({redirectTo: '/contatos'});
     }

@@ -8,6 +8,7 @@ module.exports = function (app) {
 
     var controller = {};
 
+
     controller.listaContatos = function(req, res){
         Contato.find().populate('emergencia').exec()
             .then(
