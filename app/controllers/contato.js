@@ -1,6 +1,8 @@
 /**
  * Created by rafaelmaia on 2/17/15.
  */
+var sanitize = require('mongo-sanitize');
+
 
 module.exports = function (app) {
 
@@ -25,11 +27,25 @@ module.exports = function (app) {
     controller.salvaContato = function(req, res){
         var _id = req.body._id;
 
+        /*
+        Independente da quantidade de parâmetros,
+        apenas selecione os que quer atualizar
+        nome, email, emergência.
+        */
+
+        var dados = {
+            nome: req.body.nome,
+            email: req.body.email,
+            emergencia: req.body.emergencia || null
+        };
+
+
         //Aparentemente desnecessário.
         //req.body.emergencia = req.body.emergencia || null;
 
         if(_id){
-            Contato.findByIdAndUpdate(_id, req.body).exec()
+            // use dados ao inves de req.body
+            Contato.findByIdAndUpdate(_id, dados).exec()
                 .then(
                     function(contato){
                         res.json(contato);
@@ -40,7 +56,8 @@ module.exports = function (app) {
                     }
                 )
         }else{
-            Contato.create(req.body)
+            // use dados ao inves de req.body
+            Contato.create(dados)
                 .then(
                     function(contato){
                         res.status(201).json(contato);
@@ -69,7 +86,9 @@ module.exports = function (app) {
     };
 
     controller.removeContato = function(req, res){
-        var _id = req.params.id;
+
+        //sanitize against query injection with query selectors ($)
+        var _id = sanitize(req.params.id);
         Contato.remove({"_id": _id}).exec()
             .then(
                 function(){
